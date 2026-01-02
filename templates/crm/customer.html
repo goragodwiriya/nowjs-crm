@@ -1,0 +1,202 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-customer" data-i18n>Customer</h1>
+            <p data-i18n>{LNG_Add new} {LNG_Customer}</p>
+          </div>
+        </header>
+
+        <div class="content-body">
+          <!-- Customer Form -->
+          <form data-form="customer" data-validate="true" data-reset="false" action="api/crm/customer/save" method="post" data-ajax-submit="true" data-load-query-params="true"
+                data-load-api="api/crm/customer/get" autocomplete="off">
+            <!-- Basic Information -->
+            <fieldset>
+              <legend data-i18n>Basic information</legend>
+
+              <div>
+                <label for="customer_name" data-i18n>Customer Name</label>
+                <span class="form-control icon-customer">
+                  <input type="text" id="customer_name" name="name" data-attr="value:name" required maxlength="255" autofocus>
+                </span>
+              </div>
+              <div>
+                <div class="form-group">
+                  <div class="width50">
+                    <label for="customer_company_type" data-i18n>Company Type</label>
+                    <span class="form-control icon-menus">
+                      <select id="customer_company_type" name="company_type" data-attr="value:company_type">
+                        <option value="company" data-i18n>Company</option>
+                        <option value="individual" data-i18n>Individual</option>
+                      </select>
+                    </span>
+                  </div>
+                  <div class="width50">
+                    <label for="customer_industry" data-i18n>Industry</label>
+                    <span class="form-control icon-edit">
+                      <input type="text" id="customer_industry" name="industry" data-attr="value:industry" maxlength="100">
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Contact Information -->
+            <fieldset>
+              <legend data-i18n>Contact Information</legend>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="customer_email" data-i18n>Email</label>
+                  <span class="form-control icon-email">
+                    <input type="email" id="customer_email" name="email" data-attr="value:email" maxlength="255">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="customer_website" data-i18n>Website</label>
+                  <span class="form-control icon-link">
+                    <input type="url" id="customer_website" name="website" data-attr="value:website" maxlength="255" placeholder="https://">
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="customer_phone" data-i18n>Phone</label>
+                  <span class="form-control icon-phone">
+                    <input type="tel" id="customer_phone" name="phone" data-attr="value:phone">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="customer_fax" data-i18n>Fax</label>
+                  <span class="form-control icon-print">
+                    <input type="tel" id="customer_fax" name="fax" data-attr="value:fax">
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Address Information -->
+            <fieldset>
+              <legend data-i18n>Address</legend>
+
+              <div>
+                <label for="customer_address" data-i18n>Address</label>
+                <span class="form-control icon-address">
+                  <textarea rows="3" id="customer_address" name="address" data-text="address"></textarea>
+                </span>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="customer_provinceID" data-i18n>Province</label>
+                  <span class="form-control icon-location">
+                    <input type="text" id="customer_provinceID" name="provinceID" data-options-key="province" data-attr="value:provinceID" placeholder="Type to search province...">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="customer_zipcode" data-i18n>Zipcode</label>
+                  <span class="form-control icon-location">
+                    <input type="number" id="customer_zipcode" name="zipcode" data-attr="value:zipcode" maxlength="5">
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Business Information -->
+            <fieldset>
+              <legend data-i18n>Business Information</legend>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="customer_tax_id" data-i18n>Tax ID</label>
+                  <span class="form-control icon-profile">
+                    <input type="number" id="customer_tax_id" name="tax_id" data-attr="value:tax_id" maxlength="13">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="customer_rating" data-i18n>Rating</label>
+                  <span class="form-control icon-star0">
+                    <select id="customer_rating" name="rating" data-attr="value:rating">
+                      <option value="" data-i18n>Not specified</option>
+                      <option value="1">⭐</option>
+                      <option value="2">⭐⭐</option>
+                      <option value="3">⭐⭐⭐</option>
+                      <option value="4">⭐⭐⭐⭐</option>
+                      <option value="5">⭐⭐⭐⭐⭐</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="customer_annual_revenue" data-i18n>Annual Revenue</label>
+                  <span class="form-control icon-money">
+                    <input type="currency" id="customer_annual_revenue" name="annual_revenue" data-attr="value:annual_revenue">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="customer_employee_count" data-i18n>Employee Count</label>
+                  <span class="form-control icon-users">
+                    <input type="number" id="customer_employee_count" name="employee_count" data-attr="value:employee_count">
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- CRM Information -->
+            <fieldset>
+              <legend data-i18n>CRM Information</legend>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="customer_status" data-i18n>Status</label>
+                  <span class="form-control icon-menus">
+                    <select id="customer_status" name="status" data-options-key="status" data-attr="value:status">
+                      <option value="" data-i18n>Not specified</option>
+                    </select>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="customer_source" data-i18n>Source</label>
+                  <span class="form-control icon-menus">
+                    <select id="customer_source" name="source" data-options-key="source" data-attr="value:source">
+                      <option value="" data-i18n>Not specified</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <label for="customer_owner_id" data-i18n>Owner</label>
+                <span class="form-control icon-user">
+                  <input type="text" id="customer_owner_id" name="owner_id" data-options-key="owners" data-attr="value:owner_id">
+                </span>
+              </div>
+
+              <div>
+                <label for="customer_notes" data-i18n>Notes</label>
+                <span class="form-control icon-file">
+                  <textarea rows="4" id="customer_notes" name="notes" data-text="notes"></textarea>
+                </span>
+              </div>
+            </fieldset>
+
+            <fieldset class="submit">
+              <button type="submit" class="btn btn-primary icon-save" data-i18n>Save</button>
+              <input type="hidden" name="id" data-attr="value:id">
+            </fieldset>
+          </form>
+        </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 CRM System - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

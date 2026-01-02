@@ -1,0 +1,226 @@
+<?php
+
+namespace Kotchasan\QueryBuilder\SqlBuilder;
+
+/**
+ * Class SqlServerSqlBuilder
+ *
+ * SQL Server-specific SQL builder implementation.
+ *
+ * @package Kotchasan\QueryBuilder\SqlBuilder
+ */
+class SqlServerSqlBuilder extends AbstractSqlBuilder
+{
+    /**
+     * {@inheritdoc}
+     */
+    protected array $quoteChars = ['[', ']'];
+
+    /**
+     * {@inheritdoc}
+     */
+    protected array $supportedDrivers = ['sqlsrv', 'mssql', 'sqlserver'];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDriverName(): string
+    {
+        return 'sqlsrv';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildWhereClause(array $wheres, array &$bindings): string
+    {
+        if (empty($wheres)) {
+            return '';
+        }
+
+        $conditions = [];
+        foreach ($wheres as $where) {
+            $boolean = $where['boolean'] ?? 'AND';
+            $condition = $this->processWhereCondition($where, $bindings);
+
+            if (!empty($condition)) {
+                if ($where['type'] === 'nested' && isset($where['query'])) {
+                    // Handle nested queries
+                    $nestedWhere = $this->buildWhereClause($where['query']->wheres, $bindings);
+                    if (!empty($nestedWhere)) {
+                        $condition = '('.str_replace('WHERE ', '', $nestedWhere).')';
+                    }
+                }
+
+                if (!empty($conditions)) {
+                    $conditions[] = ' '.$boolean.' ';
+                }
+                $conditions[] = $condition;
+            }
+        }
+
+        return empty($conditions) ? '' : 'WHERE '.implode('', $conditions);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildHavingClause(array $havings, array &$bindings): string
+    {
+        if (empty($havings)) {
+            return '';
+        }
+
+        $conditions = [];
+        foreach ($havings as $having) {
+            $boolean = $having['boolean'] ?? 'AND';
+            $condition = $this->processWhereCondition($having, $bindings);
+
+            if (!empty($condition)) {
+                if (!empty($conditions)) {
+                    $conditions[] = ' '.$boolean.' ';
+                }
+                $conditions[] = $condition;
+            }
+        }
+
+        return empty($conditions) ? '' : 'HAVING '.implode('', $conditions);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildLimitClause(?int $limit, ?int $offset = null): string
+    {
+        // SQL Server uses OFFSET...FETCH instead of LIMIT
+        if ($limit === null && $offset === null) {
+            return '';
+        }
+
+        $clause = '';
+
+        if ($offset !== null && $offset > 0) {
+            $clause .= 'OFFSET '.$offset.' ROWS';
+
+            if ($limit !== null) {
+                $clause .= ' FETCH NEXT '.$limit.' ROWS ONLY';
+            }
+        } elseif ($limit !== null) {
+            // For LIMIT without OFFSET, we need to use OFFSET 0
+            $clause .= 'OFFSET 0 ROWS FETCH NEXT '.$limit.' ROWS ONLY';
+        }
+
+        return $clause;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildInsertStatement(string $table, array $data, array &$bindings, bool $ignore = false): string
+    {
+        if (empty($data)) {
+            throw new \InvalidArgumentException('Insert data cannot be empty');
+        }
+
+        // Note: SQL Server doesn't have a direct equivalent to INSERT IGNORE
+        // Would require MERGE statement or TRY/CATCH, ignoring the parameter for now
+
+        $quotedTable = $this->quoteIdentifier($table);
+
+        // Handle batch insert (array of arrays)
+        if (isset($data[0]) && is_array($data[0])) {
+            $columns = array_keys($data[0]);
+            $quotedColumns = array_map([$this, 'quoteIdentifier'], $columns);
+
+            $values = [];
+            foreach ($data as $row) {
+                $rowValues = [];
+                foreach ($columns as $column) {
+                    $rowValues[] = '?';
+                    $bindings[] = $row[$column] ?? null;
+                }
+                $values[] = '('.implode(', ', $rowValues).')';
+            }
+
+            return 'INSERT INTO '.$quotedTable.' ('.implode(', ', $quotedColumns).') VALUES '.implode(', ', $values);
+        }
+
+        // Single row insert
+        $columns = array_keys($data);
+        $quotedColumns = array_map([$this, 'quoteIdentifier'], $columns);
+
+        $placeholders = [];
+        foreach ($data as $value) {
+            $placeholders[] = '?';
+            $bindings[] = $value;
+        }
+
+        return 'INSERT INTO '.$quotedTable.' ('.implode(', ', $quotedColumns).') VALUES ('.implode(', ', $placeholders).')';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildUpdateStatement(string $table, array $data, array $wheres, array &$bindings): string
+    {
+        if (empty($data)) {
+            throw new \InvalidArgumentException('Update data cannot be empty');
+        }
+
+        $quotedTable = $this->quoteIdentifier($table);
+
+        // Build SET clause
+        $setParts = [];
+        foreach ($data as $column => $value) {
+            $quotedColumn = $this->quoteIdentifier($column);
+
+            // Check if value is a Sql object or SqlFunction (raw SQL expression)
+            if ($value instanceof \Kotchasan\Database\Sql) {
+                // Use raw SQL expression directly
+                $setParts[] = $quotedColumn.' = '.$value->toSql();
+                // Merge any bindings from the Sql object
+                foreach ($value->getValues([]) as $v) {
+                    $bindings[] = $v;
+                }
+            } elseif ($value instanceof \Kotchasan\QueryBuilder\SqlFunction) {
+                // Use SqlFunction's toSql method
+                $setParts[] = $quotedColumn.' = '.$value->toSql();
+            } elseif ($value instanceof \Kotchasan\QueryBuilder\RawExpression) {
+                // Use RawExpression's toSql method
+                $setParts[] = $quotedColumn.' = '.$value->toSql();
+            } else {
+                // Regular value - use placeholder
+                $setParts[] = $quotedColumn.' = ?';
+                $bindings[] = $value;
+            }
+        }
+
+        $sql = 'UPDATE '.$quotedTable.' SET '.implode(', ', $setParts);
+
+        // Add WHERE clause
+        $whereClause = $this->buildWhereClause($wheres, $bindings);
+        if (!empty($whereClause)) {
+            $sql .= ' '.$whereClause;
+        }
+
+        return $sql;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildDeleteStatement(string $table, array $wheres, array &$bindings): string
+    {
+        $quotedTable = $this->quoteIdentifier($table);
+
+        $sql = 'DELETE FROM '.$quotedTable;
+
+        // Add WHERE clause
+        $whereClause = $this->buildWhereClause($wheres, $bindings);
+        if (!empty($whereClause)) {
+            $sql .= ' '.$whereClause;
+        }
+
+        return $sql;
+    }
+}

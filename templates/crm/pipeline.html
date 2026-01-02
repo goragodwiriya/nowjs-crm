@@ -1,0 +1,217 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+    <div>
+        <header data-component="topbar"></header>
+        <main class="content" data-script="initCrmPipeline">
+            <div class="card-groups">
+                <header>
+                    <div>
+                        <h1 class="icon-grid" data-i18n>Sales Pipeline</h1>
+                        <p data-i18n>Manage deals and track sales status</p>
+                    </div>
+                    <a class="btn btn-primary icon-new" href="/deal" data-i18n>{LNG_Add} {LNG_Deal}</a>
+                </header>
+
+                <!-- Kanban Board - Uses API component for loading data -->
+                <div id="kanban-board" data-component="api" data-endpoint="api/crm/pipeline" data-method="GET">
+
+                    <!-- Lead Column -->
+                    <div class="kanban-column">
+                        <div class="column-header">
+                            <span class="column-title">🎯 Lead</span>
+                            <span class="column-count" data-text="data.data.lead.length">0</span>
+                        </div>
+                        <!-- Sortable container with API integration -->
+                        <div class="column-cards"
+                             data-component="sortable"
+                             data-group="kanban"
+                             data-draggable=".kanban-card"
+                             data-stage="lead"
+                             data-sortable-api="api/crm/deals/update"
+                             data-sortable-method="PUT"
+                             data-sortable-id-attr="data-id"
+                             data-sortable-stage-attr="data-stage"
+                             data-sortable-update-field="stage"
+                             data-for="deal of data.data.lead">
+                            <template>
+                                <div class="kanban-card" draggable="true" data-attr="data-id:deal.id">
+                                    <a class="card-edit icon-edit" data-attr="href:'/deal?id=' + deal.id" title="Edit"></a>
+                                    <div class="deal-title" data-text="deal.title"></div>
+                                    <div class="deal-value" data-text="deal.value"></div>
+                                    <div class="deal-customer" data-text="deal.customer"></div>
+                                    <div class="deal-meta">
+                                        <span class="deal-probability" data-text="deal.probability"></span>
+                                        <span data-text="deal.created_at"></span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Qualified Column -->
+                    <div class="kanban-column">
+                        <div class="column-header">
+                            <span class="column-title">✅ Qualified</span>
+                            <span class="column-count" data-text="data.data.qualified.length">0</span>
+                        </div>
+                        <div class="column-cards"
+                             data-component="sortable"
+                             data-group="kanban"
+                             data-draggable=".kanban-card"
+                             data-stage="qualified"
+                             data-sortable-api="api/crm/deals/update"
+                             data-sortable-method="PUT"
+                             data-sortable-id-attr="data-id"
+                             data-sortable-stage-attr="data-stage"
+                             data-sortable-update-field="stage"
+                             data-for="deal of data.data.qualified">
+                            <template>
+                                <div class="kanban-card" draggable="true" data-attr="data-id:deal.id">
+                                    <a class="card-edit icon-edit" data-attr="href:'/deal?id=' + deal.id" title="Edit"></a>
+                                    <div class="deal-title" data-text="deal.title"></div>
+                                    <div class="deal-value" data-text="deal.value"></div>
+                                    <div class="deal-customer" data-text="deal.customer"></div>
+                                    <div class="deal-meta">
+                                        <span class="deal-probability" data-text="deal.probability"></span>
+                                        <span data-text="deal.created_at"></span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Proposal Column -->
+                    <div class="kanban-column">
+                        <div class="column-header">
+                            <span class="column-title">📄 Proposal</span>
+                            <span class="column-count" data-text="data.data.proposal.length">0</span>
+                        </div>
+                        <div class="column-cards"
+                             data-component="sortable"
+                             data-group="kanban"
+                             data-draggable=".kanban-card"
+                             data-stage="proposal"
+                             data-sortable-api="api/crm/deals/update"
+                             data-sortable-method="PUT"
+                             data-sortable-id-attr="data-id"
+                             data-sortable-stage-attr="data-stage"
+                             data-sortable-update-field="stage"
+                             data-for="deal of data.data.proposal">
+                            <template>
+                                <div class="kanban-card" draggable="true" data-attr="data-id:deal.id">
+                                    <a class="card-edit icon-edit" data-attr="href:'/deal?id=' + deal.id" title="Edit"></a>
+                                    <div class="deal-title" data-text="deal.title"></div>
+                                    <div class="deal-value" data-text="deal.value"></div>
+                                    <div class="deal-customer" data-text="deal.customer"></div>
+                                    <div class="deal-meta">
+                                        <span class="deal-probability" data-text="deal.probability"></span>
+                                        <span data-text="deal.created_at"></span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Negotiation Column -->
+                    <div class="kanban-column">
+                        <div class="column-header">
+                            <span class="column-title">💬 Negotiation</span>
+                            <span class="column-count" data-text="data.data.negotiation.length">0</span>
+                        </div>
+                        <div class="column-cards"
+                             data-component="sortable"
+                             data-group="kanban"
+                             data-draggable=".kanban-card"
+                             data-stage="negotiation"
+                             data-sortable-api="api/crm/deals/update"
+                             data-sortable-method="PUT"
+                             data-sortable-id-attr="data-id"
+                             data-sortable-stage-attr="data-stage"
+                             data-sortable-update-field="stage"
+                             data-for="deal of data.data.negotiation">
+                            <template>
+                                <div class="kanban-card" draggable="true" data-attr="data-id:deal.id">
+                                    <a class="card-edit icon-edit" data-attr="href:'/deal?id=' + deal.id" title="Edit"></a>
+                                    <div class="deal-title" data-text="deal.title"></div>
+                                    <div class="deal-value" data-text="deal.value"></div>
+                                    <div class="deal-customer" data-text="deal.customer"></div>
+                                    <div class="deal-meta">
+                                        <span class="deal-probability" data-text="deal.probability"></span>
+                                        <span data-text="deal.created_at"></span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Closed Won Column -->
+                    <div class="kanban-column">
+                        <div class="column-header">
+                            <span class="column-title">🎉 Closed Won</span>
+                            <span class="column-count" data-text="data.data.won.length">0</span>
+                        </div>
+                        <div class="column-cards"
+                             data-component="sortable"
+                             data-group="kanban"
+                             data-draggable=".kanban-card"
+                             data-stage="won"
+                             data-sortable-api="api/crm/deals/update"
+                             data-sortable-method="PUT"
+                             data-sortable-id-attr="data-id"
+                             data-sortable-stage-attr="data-stage"
+                             data-sortable-update-field="stage"
+                             data-for="deal of data.data.won">
+                            <template>
+                                <div class="kanban-card" draggable="true" data-attr="data-id:deal.id">
+                                    <a class="card-edit icon-edit" data-attr="href:'/deal?id=' + deal.id" title="Edit"></a>
+                                    <div class="deal-title" data-text="deal.title"></div>
+                                    <div class="deal-value" data-text="deal.value"></div>
+                                    <div class="deal-customer" data-text="deal.customer"></div>
+                                    <div class="deal-meta">
+                                        <span class="deal-probability" data-text="deal.probability"></span>
+                                        <span data-text="deal.created_at"></span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Closed Lost Column -->
+                    <div class="kanban-column">
+                        <div class="column-header">
+                            <span class="column-title">❌ Closed Lost</span>
+                            <span class="column-count" data-text="data.data.lost.length">0</span>
+                        </div>
+                        <div class="column-cards"
+                             data-component="sortable"
+                             data-group="kanban"
+                             data-draggable=".kanban-card"
+                             data-stage="lost"
+                             data-sortable-api="api/crm/deals/update"
+                             data-sortable-method="PUT"
+                             data-sortable-id-attr="data-id"
+                             data-sortable-stage-attr="data-stage"
+                             data-sortable-update-field="stage"
+                             data-for="deal of data.data.lost">
+                            <template>
+                                <div class="kanban-card" draggable="true" data-attr="data-id:deal.id">
+                                    <a class="card-edit icon-edit" data-attr="href:'/deal?id=' + deal.id" title="Edit"></a>
+                                    <div class="deal-title" data-text="deal.title"></div>
+                                    <div class="deal-value" data-text="deal.value"></div>
+                                    <div class="deal-customer" data-text="deal.customer"></div>
+                                    <div class="deal-meta">
+                                        <span class="deal-probability" data-text="deal.probability"></span>
+                                        <span data-text="deal.created_at"></span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="footer">
+        <p class="center">&copy; 2026 CRM System - Powered by <a href="https://nowjs.net">Now.js</a></p>
+    </footer>
+</div>

@@ -1,0 +1,101 @@
+<div class="customer-detail">
+  <!-- Customer Header -->
+  <div class="customer-header">
+    <div class="customer-avatar">
+      <span class="icon-user" data-if="company_type === 'individual'"></span>
+      <span class="icon-office" data-if="company_type !== 'individual'"></span>
+    </div>
+    <div class="customer-title">
+      <h2 data-text="name">ชื่อลูกค้า</h2>
+      <div class="customer-meta">
+        <span class="badge" data-text="status">สถานะ</span>
+        <span class="meta-item icon-industry" data-text="industry">อุตสาหกรรม</span>
+      </div>
+    </div>
+    <div class="customer-actions">
+      <span class="rating-stars" data-text="rating">⭐⭐⭐</span>
+    </div>
+  </div>
+
+  <!-- All Sections -->
+  <div class="detail-sections">
+    <!-- Contact Information -->
+    <section class="detail-section">
+      <h3 class="section-title icon-phone">ข้อมูลติดต่อ</h3>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <label class="detail-label">อีเมล</label>
+          <a class="detail-value link" data-attr="href:mailto_email" data-text="email">-</a>
+        </div>
+        <div class="detail-item">
+          <label class="detail-label">โทรศัพท์</label>
+          <a class="detail-value link" data-attr="href:tel_phone" data-text="phone">-</a>
+        </div>
+        <div class="detail-item">
+          <label class="detail-label">เว็บไซต์</label>
+          <a class="detail-value link" data-attr="href:website" data-text="website" target="_blank">-</a>
+        </div>
+        <div class="detail-item">
+          <label class="detail-label">แฟกซ์</label>
+          <span class="detail-value" data-text="fax">-</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Address Information -->
+    <section class="detail-section">
+      <h3 class="section-title icon-address">ที่อยู่</h3>
+      <div class="detail-grid">
+        <div class="detail-item full-width">
+          <span class="detail-value"><span data-text="address"></span> <span data-text="province"></span> <span data-text="zipcode"></span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Business Information -->
+    <section class="detail-section">
+      <h3 class="section-title icon-office">ข้อมูลธุรกิจ</h3>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <label class="detail-label">เลขประจำตัวผู้เสียภาษี</label>
+          <span class="detail-value" data-text="tax_id">-</span>
+        </div>
+        <div class="detail-item">
+          <label class="detail-label">รายได้ต่อปี</label>
+          <span class="detail-value highlight" data-text="annual_revenue">-</span>
+        </div>
+        <div class="detail-item">
+          <label class="detail-label">จำนวนพนักงาน</label>
+          <span class="detail-value" data-text="employee_count">-</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CRM Information -->
+    <section class="detail-section">
+      <h3 class="section-title icon-support">ข้อมูล CRM</h3>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <label class="detail-label">แหล่งที่มา</label>
+          <span class="detail-value" data-text="source">-</span>
+        </div>
+        <div class="detail-item">
+          <label class="detail-label">เจ้าของ</label>
+          <span class="detail-value" data-text="owner">-</span>
+        </div>
+        <div class="detail-item">
+          <label class="detail-label">สร้างเมื่อ</label>
+          <span class="detail-value" data-text="created_at">-</span>
+        </div>
+        <div class="detail-item">
+          <label class="detail-label">แก้ไขเมื่อ</label>
+          <span class="detail-value" data-text="updated_at">-</span>
+        </div>
+        <div class="detail-item full-width">
+          <label class="detail-label">หมายเหตุ</label>
+          <span class="detail-value notes" data-text="notes">-</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

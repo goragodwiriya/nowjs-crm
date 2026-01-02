@@ -1,0 +1,154 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-flag" data-i18n>Campaign</h1>
+            <p data-i18n>{LNG_Add or edit} {LNG_Campaign}</p>
+          </div>
+        </header>
+
+        <div class="content-body">
+          <!-- Campaign Form -->
+          <form data-form="campaign" data-validate="true" data-reset="false" action="api/crm/campaign/save" method="post" data-ajax-submit="true" data-load-query-params="true"
+                data-load-api="api/crm/campaign/get" autocomplete="off">
+            <!-- Basic Information -->
+            <fieldset>
+              <legend data-i18n>Campaign information</legend>
+
+              <div>
+                <label for="name" data-i18n>Campaign name</label>
+                <span class="form-control icon-edit">
+                  <input type="text" id="name" name="name" data-attr="value:name" required maxlength="255" autofocus>
+                </span>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="type" data-i18n>Type</label>
+                  <span class="form-control icon-menus">
+                    <select id="type" name="type" data-attr="value:type" required>
+                      <option value="email" data-i18n>Email</option>
+                      <option value="social" data-i18n>Social Media</option>
+                      <option value="event" data-i18n>Event</option>
+                      <option value="webinar" data-i18n>Webinar</option>
+                      <option value="advertisement" data-i18n>Advertisement</option>
+                      <option value="other" data-i18n>Other</option>
+                    </select>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="status" data-i18n>Status</label>
+                  <span class="form-control icon-menus">
+                    <select id="status" name="status" data-attr="value:status">
+                      <option value="draft" data-i18n>Draft</option>
+                      <option value="scheduled" data-i18n>Scheduled</option>
+                      <option value="active" data-i18n>Active</option>
+                      <option value="paused" data-i18n>Paused</option>
+                      <option value="completed" data-i18n>Completed</option>
+                      <option value="cancelled" data-i18n>Cancelled</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <label for="description" data-i18n>Description</label>
+                <span class="form-control icon-file">
+                  <textarea rows="3" id="description" name="description" data-text="description"></textarea>
+                </span>
+              </div>
+            </fieldset>
+
+            <!-- Schedule -->
+            <fieldset>
+              <legend data-i18n>Schedule</legend>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="start_date" data-i18n>Start date</label>
+                  <span class="form-control icon-calendar">
+                    <input type="date" id="start_date" name="start_date" data-attr="value:start_date">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="end_date" data-i18n>End date</label>
+                  <span class="form-control icon-calendar">
+                    <input type="date" id="end_date" name="end_date" data-attr="value:end_date">
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Budget and Goals -->
+            <fieldset>
+              <legend data-i18n>Budget and Goals</legend>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="budget" data-i18n>Budget</label>
+                  <span class="form-control icon-money">
+                    <input type="number" id="budget" name="budget" data-attr="value:budget" min="0" step="0.01" value="0">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="actual_cost" data-i18n>Actual cost</label>
+                  <span class="form-control icon-money">
+                    <input type="number" id="actual_cost" name="actual_cost" data-attr="value:actual_cost" min="0" step="0.01" value="0">
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="target_leads" data-i18n>Target leads</label>
+                  <span class="form-control icon-register">
+                    <input type="number" id="target_leads" name="target_leads" data-attr="value:target_leads" min="0" value="0">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="actual_leads" data-i18n>Actual leads</label>
+                  <span class="form-control icon-register">
+                    <input type="number" id="actual_leads" name="actual_leads" data-attr="value:actual_leads" min="0" value="0">
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="target_revenue" data-i18n>Target revenue</label>
+                  <span class="form-control icon-wallet">
+                    <input type="number" id="target_revenue" name="target_revenue" data-attr="value:target_revenue" min="0" step="0.01" value="0">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="actual_revenue" data-i18n>Actual revenue</label>
+                  <span class="form-control icon-wallet">
+                    <input type="number" id="actual_revenue" name="actual_revenue" data-attr="value:actual_revenue" min="0" step="0.01" value="0">
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <label for="owner_id" data-i18n>Owner</label>
+                <span class="form-control icon-user">
+                  <input type="text" id="owner_id" name="owner_id" data-options-key="owners" data-attr="value:owner_id">
+                </span>
+              </div>
+            </fieldset>
+
+            <fieldset class="submit">
+              <button type="submit" class="btn btn-primary icon-save" data-i18n>Save</button>
+              <input type="hidden" name="id" data-attr="value:id">
+            </fieldset>
+          </form>
+        </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 CRM System - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

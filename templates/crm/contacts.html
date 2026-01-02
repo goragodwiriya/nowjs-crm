@@ -1,0 +1,51 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-phone" data-i18n>Contacts</h1>
+            <p data-i18n>Manage customer contacts and communication</p>
+          </div>
+          <a class="btn btn-primary icon-new" href="/contact" data-i18n>{LNG_Add} {LNG_Contact}</a>
+        </header>
+
+        <div class="content-body">
+          <!-- Contacts Table -->
+          <div class="tablebody">
+            <table class="table border fullwidth" data-table="crm-contacts" data-source="api/crm/contacts" data-page-size="10"
+                   data-search-columns="first_name,last_name,email,phone,customer" data-show-checkbox="true"
+                   data-actions='{"status|active":"Active","status|inactive":"Inactive","delete":"Delete"}' data-action-url="api/crm/contacts/action"
+                   data-action-button='Process|btn-success' data-row-actions='{
+                              "edit": {
+                                "label": "Edit",
+                                "className": "btn btn-success icon-edit",
+                                "href": "/contact?id=${id}"
+                              }
+                          }'>
+              <thead>
+                <tr>
+                  <th data-field="id" data-sort="id" class="center" data-cell-class="center" data-i18n>ID</th>
+                  <th data-field="first_name" data-sort="first_name" data-template="${first_name} ${last_name}" data-i18n>Name</th>
+                  <th data-field="customer" data-sort="customer_id" data-i18n>Customer</th>
+                  <th data-field="job_title" data-i18n>Job Title</th>
+                  <th data-field="email" data-i18n>Email</th>
+                  <th data-field="phone" data-i18n>Phone</th>
+                  <th data-field="is_primary" class="center" data-cell-class="center" data-formatter="formatContactPrimary" data-i18n>Primary</th>
+                  <th data-field="status" data-sort="status" class="center" data-cell-class="center" data-filter="true" data-type="select" data-show-all="true" data-all-value=""
+                      data-label="Status" data-formatter="formatContactStatus" data-i18n>Status</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 CRM System - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

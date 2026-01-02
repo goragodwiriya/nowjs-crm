@@ -1,0 +1,159 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-phone" data-i18n>Contacts</h1>
+            <p data-i18n>{LNG_Add or edit} {LNG_Contacts}</p>
+          </div>
+        </header>
+
+        <div class="content-body">
+          <!-- Contact Form -->
+          <form data-form="contact" data-validate="true" data-reset="false" action="api/crm/contact/save" method="post" data-ajax-submit="true" data-load-query-params="true"
+                data-load-api="api/crm/contact/get" autocomplete="off">
+            <!-- Basic Information -->
+            <fieldset>
+              <legend data-i18n>Personal information</legend>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="first_name" data-i18n>First name</label>
+                  <span class="form-control icon-user">
+                    <input type="text" id="first_name" name="first_name" data-attr="value:first_name" required maxlength="100" autofocus>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="last_name" data-i18n>Last name</label>
+                  <span class="form-control icon-user">
+                    <input type="text" id="last_name" name="last_name" data-attr="value:last_name" maxlength="100">
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="job_title" data-i18n>Job title</label>
+                  <span class="form-control icon-edit">
+                    <input type="text" id="job_title" name="job_title" data-attr="value:job_title" maxlength="100">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="department" data-i18n>Department</label>
+                  <span class="form-control icon-menus">
+                    <input type="text" id="department" name="department" data-attr="value:department" maxlength="100">
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Contact Information -->
+            <fieldset>
+              <legend data-i18n>Contact information</legend>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="email" data-i18n>Email</label>
+                  <span class="form-control icon-email">
+                    <input type="email" id="email" name="email" data-attr="value:email" maxlength="255">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="phone" data-i18n>Phone</label>
+                  <span class="form-control icon-phone">
+                    <input type="tel" id="phone" name="phone" data-attr="value:phone" maxlength="50">
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="mobile" data-i18n>Mobile</label>
+                  <span class="form-control icon-phone">
+                    <input type="tel" id="mobile" name="mobile" data-attr="value:mobile" maxlength="50">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="linkedin" data-i18n>LinkedIn</label>
+                  <span class="form-control icon-link">
+                    <input type="url" id="linkedin" name="linkedin" data-attr="value:linkedin" maxlength="255" placeholder="https://linkedin.com/in/...">
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Relationship -->
+            <fieldset>
+              <legend data-i18n>Relationship</legend>
+
+              <div>
+                <label for="customer_id" data-i18n>Customer</label>
+                <span class="form-control icon-customer">
+                  <input type="text" id="customer_id" name="customer_id" data-options-key="customers" data-attr="value:customer_id">
+                </span>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="is_primary" data-i18n>Primary contact</label>
+                  <span class="form-control icon-star0">
+                    <select id="is_primary" name="is_primary" data-attr="value:is_primary">
+                      <option value="0" data-i18n>No</option>
+                      <option value="1" data-i18n>Yes</option>
+                    </select>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="is_decision_maker" data-i18n>Decision maker</label>
+                  <span class="form-control icon-verfied">
+                    <select id="is_decision_maker" name="is_decision_maker" data-attr="value:is_decision_maker">
+                      <option value="0" data-i18n>No</option>
+                      <option value="1" data-i18n>Yes</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="status" data-i18n>Status</label>
+                  <span class="form-control icon-menus">
+                    <select id="status" name="status" data-attr="value:status">
+                      <option value="active" data-i18n>Active</option>
+                      <option value="inactive" data-i18n>Inactive</option>
+                    </select>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="owner_id" data-i18n>Owner</label>
+                  <span class="form-control icon-user">
+                    <select id="owner_id" name="owner_id" data-options-key="owners" data-attr="value:owner_id">
+                      <option value="" data-i18n>Not specified</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <label for="notes" data-i18n>Notes</label>
+                <span class="form-control icon-file">
+                  <textarea rows="4" id="notes" name="notes" data-text="notes"></textarea>
+                </span>
+              </div>
+            </fieldset>
+
+            <fieldset class="submit">
+              <button type="submit" class="btn btn-primary icon-save" data-i18n>Save</button>
+              <input type="hidden" name="id" data-attr="value:id">
+            </fieldset>
+          </form>
+        </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 CRM System - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

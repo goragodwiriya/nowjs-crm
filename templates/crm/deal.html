@@ -1,0 +1,144 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-wallet" data-i18n>Deal</h1>
+            <p data-i18n>{LNG_Add or edit} {LNG_Deal}</p>
+          </div>
+        </header>
+
+        <div class="content-body">
+          <!-- Deal Form -->
+          <form data-form="deal" data-validate="true" data-reset="false" action="api/crm/deal/save" method="post" data-ajax-submit="true" data-load-query-params="true"
+                data-load-api="api/crm/deal/get" autocomplete="off">
+            <!-- Basic Information -->
+            <fieldset>
+              <legend data-i18n>Deal information</legend>
+
+              <div>
+                <label for="title" data-i18n>Deal title</label>
+                <span class="form-control icon-edit">
+                  <input type="text" id="title" name="title" required maxlength="255" autofocus>
+                </span>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="customer_id" data-i18n>Customer</label>
+                  <span class="form-control icon-customer">
+                    <input type="text" id="customer_id" name="customer_id" data-options-key="customers" data-attr="value:customer_id">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="contact_id" data-i18n>Contact</label>
+                  <span class="form-control icon-user">
+                    <input type="text" id="contact_id" name="contact_id" data-options-key="contacts" data-attr="value:contact_id">
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Values -->
+            <fieldset>
+              <legend data-i18n>Value and Stage</legend>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="value" data-i18n>Deal value</label>
+                  <span class="form-control icon-money">
+                    <input type="currency" id="value" name="value" required>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="probability" data-i18n>{LNG_Probability} (%)</label>
+                  <span class="form-control icon-stats">
+                    <input type="number" id="probability" name="probability" min="0" max="100" value="10">
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="stage" data-i18n>Stage</label>
+                  <span class="form-control icon-menus">
+                    <select id="stage" name="stage" data-attr="value:stage">
+                      <option value="lead">Lead</option>
+                      <option value="qualified">Qualified</option>
+                      <option value="proposal">Proposal</option>
+                      <option value="negotiation">Negotiation</option>
+                      <option value="won">Closed Won</option>
+                      <option value="lost">Closed Lost</option>
+                    </select>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="priority" data-i18n>Priority</label>
+                  <span class="form-control icon-warning">
+                    <select id="priority" name="priority" data-attr="value:priority">
+                      <option value="low" data-i18n>Low</option>
+                      <option value="medium" data-i18n>Medium</option>
+                      <option value="high" data-i18n>High</option>
+                      <option value="urgent" data-i18n>Urgent</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="expected_close_date" data-i18n>Expected close date</label>
+                  <span class="form-control icon-calendar">
+                    <input type="date" id="expected_close_date" name="expected_close_date">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="source" data-i18n>Source</label>
+                  <span class="form-control icon-link">
+                    <select id="source" name="source" data-attr="value:source">
+                      <option value="website" data-i18n>Website</option>
+                      <option value="referral" data-i18n>Referral</option>
+                      <option value="cold_call" data-i18n>Cold call</option>
+                      <option value="upsell" data-i18n>Upsell</option>
+                      <option value="cross_sell" data-i18n>Cross sell</option>
+                      <option value="other" data-i18n>Other</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Assignment -->
+            <fieldset>
+              <legend data-i18n>Assignment</legend>
+
+              <div>
+                <label for="customer_owner_id" data-i18n>Owner</label>
+                <span class="form-control icon-user">
+                  <input type="text" id="customer_owner_id" name="owner_id" data-options-key="owners" data-attr="value:owner_id">
+                </span>
+              </div>
+
+              <div>
+                <label for="notes" data-i18n>Notes</label>
+                <span class="form-control icon-file">
+                  <textarea rows="4" id="notes" name="notes" data-text="notes"></textarea>
+                </span>
+              </div>
+            </fieldset>
+
+            <fieldset class="submit">
+              <button type="submit" class="btn btn-primary icon-save" data-i18n>Save</button>
+              <input type="hidden" name="id" data-attr="value:id">
+            </fieldset>
+          </form>
+        </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 CRM System - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

@@ -1,0 +1,165 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-event" data-i18n>Activity</h1>
+            <p data-i18n>{LNG_Add or edit} {LNG_Activity}</p>
+          </div>
+        </header>
+
+        <div class="content-body">
+          <!-- Activity Form -->
+          <form data-form="activity" data-validate="true" data-reset="false" action="api/crm/activity/save" method="post" data-ajax-submit="true" data-load-query-params="true"
+                data-load-api="api/crm/activity/get" autocomplete="off">
+            <!-- Activity Information -->
+            <fieldset>
+              <legend data-i18n>Activity information</legend>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="type" data-i18n>Type</label>
+                  <span class="form-control icon-menus">
+                    <select id="type" name="type" data-attr="value:type" required>
+                      <option value="call" data-i18n>Call</option>
+                      <option value="meeting" data-i18n>Meeting</option>
+                      <option value="email" data-i18n>Email</option>
+                      <option value="task" data-i18n>Task</option>
+                      <option value="note" data-i18n>Note</option>
+                      <option value="lunch" data-i18n>Lunch</option>
+                      <option value="demo" data-i18n>Demo</option>
+                      <option value="follow_up" data-i18n>Follow Up</option>
+                    </select>
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="priority" data-i18n>Priority</label>
+                  <span class="form-control icon-warning">
+                    <select id="priority" name="priority" data-attr="value:priority">
+                      <option value="low" data-i18n>Low</option>
+                      <option value="medium" data-i18n>Medium</option>
+                      <option value="high" data-i18n>High</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <label for="subject" data-i18n>Subject</label>
+                <span class="form-control icon-edit">
+                  <input type="text" id="subject" name="subject" data-attr="value:subject" required maxlength="255" autofocus>
+                </span>
+              </div>
+
+              <div>
+                <label for="description" data-i18n>Description</label>
+                <span class="form-control icon-file">
+                  <textarea rows="3" id="description" name="description" data-text="description"></textarea>
+                </span>
+              </div>
+            </fieldset>
+
+            <!-- Schedule -->
+            <fieldset>
+              <legend data-i18n>Schedule</legend>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="start_time" data-i18n>Start time</label>
+                  <span class="form-control icon-calendar">
+                    <input type="datetime-local" id="start_time" name="start_time" data-attr="value:start_time">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="end_time" data-i18n>End time</label>
+                  <span class="form-control icon-calendar">
+                    <input type="datetime-local" id="end_time" name="end_time" data-attr="value:end_time">
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="duration_minutes" data-i18n>{LNG_Duration} ({LNG_minutes})</label>
+                  <span class="form-control icon-clock">
+                    <input type="number" id="duration_minutes" name="duration_minutes" data-attr="value:duration_minutes" min="0" value="30">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="location" data-i18n>Location</label>
+                  <span class="form-control icon-location">
+                    <input type="text" id="location" name="location" data-attr="value:location" maxlength="255">
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <label for="reminder_at" data-i18n>Reminder</label>
+                <span class="form-control icon-notifications">
+                  <input type="datetime-local" id="reminder_at" name="reminder_at" data-attr="value:reminder_at">
+                </span>
+              </div>
+            </fieldset>
+
+            <!-- Relationship -->
+            <fieldset>
+              <legend data-i18n>Relationship</legend>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="customer_id" data-i18n>Customer</label>
+                  <span class="form-control icon-customer">
+                    <input type="text" id="customer_id" name="customer_id" data-options-key="customers" data-attr="value:customer_id">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="deal_id" data-i18n>Deal</label>
+                  <span class="form-control icon-money">
+                    <input type="text" id="deal_id" name="deal_id" data-options-key="deals" data-attr="value:deal_id">
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="width50">
+                  <label for="owner_id" data-i18n>Owner</label>
+                  <span class="form-control icon-user">
+                    <input type="text" id="owner_id" name="owner_id" data-options-key="owners" data-attr="value:owner_id">
+                  </span>
+                </div>
+                <div class="width50">
+                  <label for="status" data-i18n>Status</label>
+                  <span class="form-control icon-menus">
+                    <select id="status" name="status" data-attr="value:status">
+                      <option value="scheduled" data-i18n>Scheduled</option>
+                      <option value="completed" data-i18n>Completed</option>
+                      <option value="cancelled" data-i18n>Cancelled</option>
+                      <option value="no_show" data-i18n>No Show</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <label for="outcome" data-i18n>Outcome</label>
+                <span class="form-control icon-file">
+                  <textarea rows="3" id="outcome" name="outcome" data-text="outcome"></textarea>
+                </span>
+              </div>
+            </fieldset>
+
+            <fieldset class="submit">
+              <button type="submit" class="btn btn-primary icon-save" data-i18n>Save</button>
+              <input type="hidden" name="id" data-attr="value:id">
+            </fieldset>
+          </form>
+        </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 CRM System - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

@@ -1,0 +1,60 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 class="icon-wallet" data-i18n>Deals</h1>
+            <p data-i18n>Manage deals and track sales opportunities</p>
+          </div>
+          <a class="btn btn-primary icon-new" href="/deal" data-i18n>{LNG_Add} {LNG_Deal}</a>
+        </header>
+
+        <div class="content-body">
+          <!-- Deals Table -->
+          <div class="tablebody">
+            <table class="table border fullwidth" data-table="deals" data-source="api/crm/deals"
+                   data-default-sort="create_date desc" data-page-size="25" data-search-columns="title,customer"
+                   data-show-checkbox="true"
+                   data-actions='{"stage|lead":"Lead","stage|qualified":"Qualified","stage|proposal":"Proposal","stage|negotiation":"Negotiation","stage|won":"Won","stage|lost":"Lost","delete":"Delete"}'
+                   data-action-url="api/crm/deals/action" data-action-button='Process|btn-success' data-row-actions='{
+                              "edit": {
+                                "label": "Edit",
+                                "className": "btn btn-success icon-edit",
+                                "modal": {
+                                  "template": "crm/deal.html",
+                                  "title": "{LNG_Edit} {LNG_Deal}"
+                                }
+                              }
+                          }'>
+              <thead>
+                <tr>
+                  <th data-field="id" data-sort="id" class="center" data-i18n>ID</th>
+                  <th data-field="title" data-sort="title" data-i18n>Deal Title</th>
+                  <th data-field="customer" data-sort="customer" data-i18n>Customer</th>
+                  <th data-field="value" data-sort="value" class="center" data-cell-class="right" data-i18n>Value</th>
+                  <th data-field="stage" data-sort="stage" class="center" data-cell-class="center" data-filter="true"
+                      data-type="select" data-show-all="true" data-all-value="" data-label="Stage"
+                      data-formatter="formatDealStage" data-i18n>Stage</th>
+                  <th data-field="probability" class="center" data-cell-class="center" data-template="${probability}%"
+                      data-i18n>Prob.</th>
+                  <th data-field="owner" data-sort="owner" data-i18n>Owner</th>
+                  <th data-field="expected_close_date" data-sort="expected_close_date" class="center"
+                      data-cell-class="center" data-format="date" data-i18n>Expected Close</th>
+                  <th data-field="created_at" data-sort="created_at" class="center" data-cell-class="center"
+                      data-format="date" data-i18n>Created</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 CRM System - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>

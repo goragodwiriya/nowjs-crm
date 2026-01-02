@@ -1,0 +1,309 @@
+<aside data-component="sidebar"></aside>
+<div class="main-content">
+  <div>
+    <header data-component="topbar"></header>
+    <main class="content dashboard">
+      <div class="card-groups">
+        <header>
+          <div>
+            <h1 data-i18n>Dashboard</h1>
+            <p data-i18n>Overview of data and performance</p>
+          </div>
+        </header>
+
+        <!-- Overview Metrics Cards -->
+        <div class="ggrid" data-component="api" data-endpoint="api/crm/dashboard" data-cache="true" data-cache-time="300000">
+          <!-- all customers -->
+          <div class="block3 large6 stat-card" data-cell-class="data.overview.customer_growth >= 0 ? 'positive' : 'negative'">
+            <div class="stat-header icon-users">
+              <div class="stat-title" data-i18n>Total Customers</div>
+            </div>
+            <div class="stat-value" data-text="data.overview.total_customers"></div>
+            <div class="stat-change">
+              <span data-cell-class="data.overview.customer_growth >= 0 ? 'icon-arrow-up' : 'icon-arrow-down'" data-text="data.overview.customer_growth + '%'"></span><span data-i18n>from last month</span>
+            </div>
+          </div>
+
+          <!-- active deals -->
+          <div class="block3 large6 stat-card positive">
+            <div class="stat-header icon-create">
+              <div class="stat-title" data-i18n>Active Deals</div>
+            </div>
+            <div class="stat-value" data-text="data.overview.active_deals"></div>
+            <div class="stat-change">
+              <span data-i18n>Value</span>
+              <span data-text="data.overview.pipeline_value"></span>
+              <span data-i18n>baht</span>
+            </div>
+          </div>
+
+          <!-- revenue this month -->
+          <div class="block3 large6 stat-card" data-cell-class="data.overview.revenue_growth >= 0 ? 'positive' : 'negative'">
+            <div class="stat-header icon-wallet">
+              <div class="stat-title" data-i18n>Revenue This Month</div>
+            </div>
+            <div class="stat-value one_line" data-text="data.overview.revenue_this_month"></div>
+            <div class="stat-change">
+              <span data-cell-class="data.overview.revenue_growth >= 0 ? 'icon-arrow-up' : 'icon-arrow-down'" data-text="data.overview.revenue_growth + '%'"></span>
+              <span data-i18n>from last month</span>
+            </div>
+          </div>
+
+          <!-- win rate this month -->
+          <div class="block3 large6 stat-card positive">
+            <div class="stat-header icon-stats">
+              <div class="stat-title" data-i18n>Win Rate This Month</div>
+            </div>
+            <div class="stat-value"><span data-text="data.overview.win_rate_this_month"></span>%</div>
+            <div class="stat-change">
+              <span data-i18n>Won</span>: <span data-text="data.overview.won_deals_this_month"></span>|
+              <span data-i18n>Lost</span>: <span data-text="data.overview.lost_deals_this_month"></span>
+            </div>
+          </div>
+
+          <!-- Leads -->
+          <div class="block3 large6 stat-card">
+            <div class="stat-header icon-register">
+              <div class="stat-title" data-i18n>Leads</div>
+            </div>
+            <div class="stat-value" data-text="data.overview.leads"></div>
+            <div class="stat-change" data-i18n>Waiting for Follow-up</div>
+          </div>
+
+          <!-- Prospects -->
+          <div class="block3 large6 stat-card">
+            <div class="stat-header icon-flag">
+              <div class="stat-title" data-i18n>Prospects</div>
+            </div>
+            <div class="stat-value" data-text="data.overview.prospects"></div>
+            <div class="stat-change" data-i18n>Negotiating</div>
+          </div>
+
+          <!-- active customers -->
+          <div class="block3 large6 stat-card positive">
+            <div class="stat-header icon-verfied">
+              <div class="stat-title" data-i18n>Active Customers</div>
+            </div>
+            <div class="stat-value one_line" data-text="data.overview.active_customers"></div>
+            <div class="stat-change" data-i18n>Active</div>
+          </div>
+
+          <!-- average deal size -->
+          <div class="block3 large6 stat-card">
+            <div class="stat-header icon-arrow-up-right">
+              <div class="stat-title" data-i18n>Average Deal Size</div>
+            </div>
+            <div class="stat-value one_line" data-text="data.overview.avg_deal_value"></div>
+            <div class="stat-change" data-i18n>Average Deal Size</div>
+          </div>
+
+          <!-- Weighted Pipeline -->
+          <div class="block3 large6 stat-card">
+            <div class="stat-header icon-money">
+              <div class="stat-title" data-i18n>Weighted Pipeline</div>
+            </div>
+            <div class="stat-value one_line" data-text="data.pipeline.weighted_pipeline_value"></div>
+            <div class="stat-change" data-i18n>Weighted Pipeline</div>
+          </div>
+
+          <!-- Deals Closing Soon -->
+          <div class="block3 large6 stat-card warning">
+            <div class="stat-header icon-clock">
+              <div class="stat-title" data-i18n>Deals Closing Soon</div>
+            </div>
+            <div class="stat-value" data-text="data.pipeline.closing_soon.count"></div>
+            <div class="stat-change">
+              <span data-i18n>Value</span>
+              <span data-text="data.pipeline.closing_soon.value"></span>
+              <span><span data-i18n>baht</span> (7&nbsp;<span data-i18n>days</span>)</span>
+            </div>
+          </div>
+
+          <!-- Average Sales Cycle -->
+          <div class="block3 large6 stat-card">
+            <div class="stat-header icon-calendar">
+              <div class="stat-title" data-i18n>Average Sales Cycle</div>
+            </div>
+            <div class="stat-value"><span data-text="data.pipeline.avg_sales_cycle_days"></span> <span data-i18n>days</span></div>
+            <div class="stat-change" data-i18n>Average Sales Cycle</div>
+          </div>
+
+          <!-- Overdue Tasks -->
+          <div class="block3 large6 stat-card" data-cell-class="data.activities.overdue_tasks > 0 ? 'negative' : 'positive'">
+            <div class="stat-header icon-warning">
+              <div class="stat-title" data-i18n>Overdue Tasks</div>
+            </div>
+            <div class="stat-value" data-text="data.activities.overdue_tasks"></div>
+            <div class="stat-change" data-i18n>Overdue Tasks</div>
+          </div>
+
+          <!-- Tasks Due Today -->
+          <div class="block3 large6 stat-card">
+            <div class="stat-header icon-list">
+              <div class="stat-title" data-i18n>Tasks Due Today</div>
+            </div>
+            <div class="stat-value" data-text="data.activities.tasks_due_today.total"></div>
+            <div class="stat-change">
+              <span data-i18n>Completed</span>
+              <span data-text="data.activities.tasks_due_today.completed"></span>
+              <span data-i18n>Tasks</span>
+            </div>
+          </div>
+
+          <!-- Upcoming Tasks -->
+          <div class="block3 large6 stat-card">
+            <div class="stat-header icon-listview">
+              <div class="stat-title" data-i18n>Upcoming Tasks</div>
+            </div>
+            <div class="stat-value" data-text="data.activities.upcoming_tasks"></div>
+            <div class="stat-change" data-i18n>next 7 days</div>
+          </div>
+
+          <!-- Activities Today -->
+          <div class="block3 large6 stat-card">
+            <div class="stat-header icon-event">
+              <div class="stat-title" data-i18n>Activities Today</div>
+            </div>
+            <div class="stat-value" data-text="data.activities.activities_today.total"></div>
+            <div class="stat-change">
+              <span data-i18n>Appointment</span><span data-text="data.activities.activities_today.scheduled"></span>|
+              <span data-i18n>Completed</span><span data-text="data.activities.activities_today.completed"></span>
+            </div>
+          </div>
+
+          <!-- New Customers This Month -->
+          <div class="block3 large6 stat-card" data-cell-class="data.overview.customer_growth >= 0 ? 'positive' : 'negative'">
+            <div class="stat-header icon-register">
+              <div class="stat-title" data-i18n>New Customers This Month</div>
+            </div>
+            <div class="stat-value" data-text="data.overview.new_customers_this_month"></div>
+            <div class="stat-change">
+              <span data-i18n>Last month</span>
+              <span data-text="data.overview.new_customers_last_month"></span>
+              <span data-i18n>persons</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="ggrid">
+          <section class="block6">
+            <h2 data-i18n>Quarterly sales</h2>
+            <div style="height: 400px;" data-component="graph" data-type="bar" data-url="api/crm/quarterly-sales"></div>
+          </section>
+          <section class="block6">
+            <h2 data-i18n>Pipeline proportion</h2>
+            <div style="height: 400px;" data-component="graph" data-type="pie" data-url="api/crm/pipeline-stats"></div>
+          </section>
+        </div>
+
+        <div class="ggrid">
+          <section class="block12">
+            <h2 data-i18n>Revenue Trend</h2>
+            <div style="height: 400px;" data-component="graph" data-type="line" data-url="api/crm/revenue-trend"></div>
+          </section>
+        </div>
+
+        <div class="ggrid">
+          <!-- Recent Customers -->
+          <section class="block6">
+            <h2 class="icon-register" data-i18n>Recent Customers</h2>
+            <div class="tablebody">
+              <table class="table border fullwidth" data-table="recent-customers" data-source="api/crm/customers/recent">
+                <thead>
+                  <tr>
+                    <th data-field="name" data-i18n>Name</th>
+                    <th data-field="status" class="center" data-cell-class="center" data-formatter="formatCustomerStatus" data-i18n>Status</th>
+                    <th data-field="source" class="center" data-cell-class="center" data-formatter="formatCustomerSource" data-i18n>Source</th>
+                    <th data-field="created_at" class="center" data-cell-class="center" data-format="date" data-i18n>Created</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Recent Deals -->
+          <section class="block6">
+            <h2 class="icon-wallet" data-i18n>Recent Deals</h2>
+            <div class="tablebody">
+              <table class="table border fullwidth" data-table="recent-deals" data-source="api/crm/deals/recent">
+                <thead>
+                  <tr>
+                    <th data-field="title" data-i18n>Title</th>
+                    <th data-field="customer_name" data-i18n>Customer</th>
+                    <th data-field="value" class="center" data-cell-class="right" data-format="currency" data-i18n>Value</th>
+                    <th data-field="stage" class="center" data-cell-class="center" data-formatter="formatDealStage" data-i18n>Stage</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <div class="ggrid">
+          <!-- Recent Won Deals -->
+          <section class="block6">
+            <h2 class="icon-customer" data-i18n>Recent Won Deals</h2>
+            <div class="tablebody">
+              <table class="table border fullwidth" data-table="recent-won-deals" data-source="api/crm/deals/won">
+                <thead>
+                  <tr>
+                    <th data-field="title" data-i18n>Deal</th>
+                    <th data-field="customer_name" data-i18n>Customer</th>
+                    <th data-field="value" class="center" data-cell-class="right" data-format="currency" data-i18n>Value</th>
+                    <th data-field="owner_name" data-i18n>Owner</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Recent Activities -->
+          <section class="block6">
+            <h2 class="icon-list" data-i18n>Recent Activities</h2>
+            <div class="tablebody">
+              <table class="table border fullwidth" data-table="recent-activities" data-source="api/crm/activities/recent">
+                <thead>
+                  <tr>
+                    <th data-field="type" class="center" data-cell-class="center" data-formatter="formatActivityIcon" data-i18n>Type</th>
+                    <th data-field="subject" data-i18n>Subject</th>
+                    <th data-field="customer_name" data-i18n>Customer</th>
+                    <th data-field="status" class="center" data-cell-class="center" data-formatter="formatActivityStatus" data-i18n>Status</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <!-- Top Performers -->
+        <div class="ggrid">
+          <section class="block12">
+            <h2 class="icon-win" data-i18n>Top Performers this month</h2>
+            <div class="tablebody">
+              <table class="table border fullwidth" data-table="dashboard-teamperformance" data-source="api/crm/dashboard/teamperformance">
+                <thead>
+                  <tr>
+                    <th data-field="rank" data-template="<span class='icon-win ${badge_class}'></span>" data-i18n></th>
+                    <th data-field="name" data-i18n>Name</th>
+                    <th data-field="deals_won" class="center" data-cell-class="center" data-i18n>Deals Won</th>
+                    <th data-field="revenue" class="center" data-cell-class="right" data-format="currency" data-i18n>Revenue</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </main>
+  </div>
+  <footer class="footer">
+    <p class="center">&copy; 2026 CRM System - Powered by <a href="https://nowjs.net">Now.js</a></p>
+  </footer>
+</div>
